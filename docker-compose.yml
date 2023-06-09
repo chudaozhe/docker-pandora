@@ -1,0 +1,25 @@
+version: "3.4"
+
+# 使用外部网络
+# docker network create server_web-network
+networks:
+  server_web-network:
+    external: true
+
+services:
+  pandora:
+    image: pengzhile/pandora:1.1.18
+    restart: always
+    tty: true
+    volumes:
+      - ./data:/data
+      - ./token.json:/token.json
+    environment:
+#      cloud 模式目前都是靠自己在页面登录/输入token的，不能内置。
+#      - PANDORA_TOKENS_FILE=/data/token.json
+      - PANDORA_CLOUD=cloud
+      - PANDORA_SERVER=0.0.0.0:8899
+    ports:
+      - "8899:8899"
+    networks:
+      - server_web-network
