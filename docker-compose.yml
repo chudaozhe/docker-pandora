@@ -16,9 +16,11 @@ services:
       - ./token.json:/token.json
     environment:
 #      cloud 模式目前都是靠自己在页面登录/输入token的，不能内置。
-#      - PANDORA_TOKENS_FILE=/data/token.json
-      - PANDORA_CLOUD=cloud
+#      - PANDORA_CLOUD=cloud
       - PANDORA_SERVER=0.0.0.0:8899
+#      - OPENAI_EMAIL=
+#      - OPENAI_PASSWORD=
+      - PANDORA_TOKENS_FILE=/token.json
     ports:
       - "8899:8899"
     networks:
